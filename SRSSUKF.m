@@ -462,6 +462,7 @@ classdef SRSSUKF < handle
             % x ... Nx1 vector to be written to the internal state with N being the dimension of the augmented state.
             assert(int32(numel(x)) == obj.L);
             obj.x = reshape(x, [obj.L, int32(1)]);
+            obj.spU2D = false;
         end
         function SetInternalSqrtCovariance(obj, S)
             %SRSSUKF.SetInternalSqrtCovariance Override the internal square-root covariance matrix.
@@ -470,6 +471,7 @@ classdef SRSSUKF < handle
             % S ... NxN matrix to be written to the internal square-root covariance matrix with N being the dimension of the augmented state.
             assert(ismatrix(S) && (int32(size(S,1)) == obj.LS) && (int32(size(S,2)) == obj.LS));
             obj.S = S;
+            obj.spU2D = false;
         end
         function SetSqrtQ(obj, sqrtQ)
             %SRSSUKF.SetSqrtQ Set square-root of process covariance Q.
